@@ -26,3 +26,10 @@
   (if (or (< x 0) (< y 0) (< z 0))
     (* x y z) #f))
 
+(define (grade score)
+  (cond
+    ((>= score 90) "A")
+    ((<= 80 score 89) "B")
+    ((<= 70 score 79) "C")
+    ((<= 60 score 69) "D")
+    ((< score 60) "F")))
