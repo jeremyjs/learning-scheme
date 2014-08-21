@@ -1,31 +1,35 @@
-(define (abs x)
-  (if (< x 0)
-    (- x) x))
+; helpers
+(define (unless x)
+  (if (not x)))
+
+; main
+(define (my_abs x)
+  (if (negative? x)
+    (- x)
+    x
+  ))
 
 (define (recip x)
-  (if (= x 0)
-    #f
-    (/ 1 x)))
+  (unless (zero? x)
+    (/ x)))
 
 (define (int->ascii c)
-  (if (or (< c 33) (> c 126))
-    #f
+  (if (<= 33 c 126)
     (integer->char c)))
 
-(define (f x y z)
-  (and (> x 0) (> y 0) (> z 0) (* x y z)))
+(define (prod3and x y z)
+  (and (positive? x)
+       (positive? y)
+       (positive? z)
+       (* x y z)))
 
-(define (f2 x y z)
-  (if (and (> x 0) (> y 0) (> z 0))
-    (* x y z) #f))
+(define (prod3or x y z)
+  (if (or (negative? x)
+          (negative? y)
+          (negative? z))
+      (* x y z)))
 
-(define (g x y z)
-  (and (or (< x 0) (< y 0) (< z 0)) (* x y z)))
-
-(define (g2 x y z)
-  (if (or (< x 0) (< y 0) (< z 0))
-    (* x y z) #f))
-
+; returns letter grade for a given score (%)
 (define (grade score)
   (cond
     ((>= score 90) "A")
@@ -33,3 +37,4 @@
     ((<= 70 score 79) "C")
     ((<= 60 score 69) "D")
     ((< score 60) "F")))
+
